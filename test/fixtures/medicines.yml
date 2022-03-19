@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  brand_name: MyString
+  generic_name: MyString
+  dosage_form: MyString
+  cost: 9.99
+
+two:
+  brand_name: MyString
+  generic_name: MyString
+  dosage_form: MyString
+  cost: 9.99

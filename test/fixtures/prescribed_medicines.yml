@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  brand_name: MyString
+  generic_name: MyString
+  quantity: 1
+  prescription: one
+  medicine: one
+
+two:
+  brand_name: MyString
+  generic_name: MyString
+  quantity: 1
+  prescription: two
+  medicine: two
