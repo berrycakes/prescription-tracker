@@ -1,0 +1,11 @@
+<header>
+    <nav class="container flex align-middle py-8 mx-auto bg-white w-full">
+        <img class="object-contain h-20" src=<%= image_path('https://img.icons8.com/external-flaticons-lineal-color-flat-icons/344/external-prescription-pharmaceutical-flaticons-lineal-color-flat-icons-9.png')%>/>
+        <h3>My Prescription Tracker</h3>
+        <ul class="flex justify-end align-middle w-3/5">
+            <li class="nav-li"> <%= link_to "Prescriptions", prescriptions_path, class: "navlink" %> </li>
+            <li class="nav-li"> <%= link_to "Doctors", doctors_path, class: "navlink" %> </li>
+            <li class="nav-li"> <%= link_to "Medicines", medicines_path, class: "navlink" %> </li>
+        </ul>
+    </nav>
+</header>
