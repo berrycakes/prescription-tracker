@@ -1,0 +1,19 @@
+%p#notice= notice
+%p
+  %strong Brand name:
+  = @prescribed_medicine.brand_name
+%p
+  %strong Generic name:
+  = @prescribed_medicine.generic_name
+%p
+  %strong Quantity:
+  = @prescribed_medicine.quantity
+%p
+  %strong Prescription:
+  = @prescribed_medicine.prescription_id
+%p
+  %strong Medicine:
+  = @prescribed_medicine.medicine_id
+= link_to 'Edit', edit_prescribed_medicine_path(@prescribed_medicine)
+|
+= link_to 'Back', prescribed_medicines_path

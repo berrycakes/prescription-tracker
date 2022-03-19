@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %strong Brand name:
+  = @medicine.brand_name
+%p
+  %strong Generic name:
+  = @medicine.generic_name
+%p
+  %strong Dosage form:
+  = @medicine.dosage_form
+%p
+  %strong Cost:
+  = @medicine.cost
+= link_to 'Edit', edit_medicine_path(@medicine)
+|
+= link_to 'Back', medicines_path

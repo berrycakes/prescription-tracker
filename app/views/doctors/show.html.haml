@@ -1,0 +1,25 @@
+%p#notice= notice
+%p
+  %strong First name:
+  = @doctor.first_name
+%p
+  %strong Last name:
+  = @doctor.last_name
+%p
+  %strong License number:
+  = @doctor.license_number
+%p
+  %strong Specialization:
+  = @doctor.specialization
+%p
+  %strong Clinic name:
+  = @doctor.clinic_name
+%p
+  %strong Clinic address:
+  = @doctor.clinic_address
+%p
+  %strong Contact:
+  = @doctor.contact
+= link_to 'Edit', edit_doctor_path(@doctor)
+|
+= link_to 'Back', doctors_path

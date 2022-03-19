@@ -1,0 +1,22 @@
+%p#notice= notice
+%h1 Medicines
+%table
+  %thead
+    %tr
+      %th Brand name
+      %th Generic name
+      %th Dosage form
+      %th Cost
+      %th{:colspan => "3"}
+  %tbody
+    - @medicines.each do |medicine|
+      %tr
+        %td= medicine.brand_name
+        %td= medicine.generic_name
+        %td= medicine.dosage_form
+        %td= medicine.cost
+        %td= link_to 'Show', medicine
+        %td= link_to 'Edit', edit_medicine_path(medicine)
+        %td= link_to 'Destroy', medicine, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Medicine', new_medicine_path

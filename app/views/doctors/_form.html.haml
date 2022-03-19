@@ -1,0 +1,32 @@
+= form_with(model: doctor) do |form|
+  - if doctor.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(doctor.errors.count, "error")
+        prohibited this doctor from being saved:
+      %ul
+        - doctor.errors.each do |error|
+          %li= error.full_message
+  .field
+    = form.label :first_name
+    = form.text_field :first_name
+  .field
+    = form.label :last_name
+    = form.text_field :last_name
+  .field
+    = form.label :license_number
+    = form.number_field :license_number
+  .field
+    = form.label :specialization
+    = form.text_field :specialization
+  .field
+    = form.label :clinic_name
+    = form.text_field :clinic_name
+  .field
+    = form.label :clinic_address
+    = form.text_field :clinic_address
+  .field
+    = form.label :contact
+    = form.text_field :contact
+  .actions
+    = form.submit

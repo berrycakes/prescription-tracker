@@ -1,0 +1,13 @@
+%body
+  %header
+    %nav.container.flex.align-middle.py-8.mx-auto.bg-white.w-full
+      %img.object-contain.h-20{:src => 
+      image_path('https://img.icons8.com/external-flaticons-lineal-color-flat-icons/344/external-prescription-pharmaceutical-flaticons-lineal-color-flat-icons-9.png')}
+      %h3 My Prescription Tracker
+      %ul.flex.justify-end.align-middle{:class => "w-3/5"}
+        %li.nav-li
+          = link_to "Prescriptions", prescriptions_path, class: "navlink"
+        %li.nav-li
+          = link_to "Doctors", doctors_path, class: "navlink"
+        %li.nav-li
+          = link_to "Medicines", medicines_path, class: "navlink"

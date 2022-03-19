@@ -1,0 +1,23 @@
+= form_with(model: medicine) do |form|
+  - if medicine.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(medicine.errors.count, "error")
+        prohibited this medicine from being saved:
+      %ul
+        - medicine.errors.each do |error|
+          %li= error.full_message
+  .field
+    = form.label :brand_name
+    = form.text_field :brand_name
+  .field
+    = form.label :generic_name
+    = form.text_field :generic_name
+  .field
+    = form.label :dosage_form
+    = form.text_field :dosage_form
+  .field
+    = form.label :cost
+    = form.text_field :cost
+  .actions
+    = form.submit

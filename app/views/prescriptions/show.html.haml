@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Date prescribed:
+  = @prescription.date_prescribed
+%p
+  %strong Doctor:
+  = @prescription.doctor_id
+= link_to 'Edit', edit_prescription_path(@prescription)
+|
+= link_to 'Back', prescriptions_path
