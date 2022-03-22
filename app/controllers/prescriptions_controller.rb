@@ -8,15 +8,18 @@ class PrescriptionsController < ApplicationController
 
   # GET /prescriptions/1 or /prescriptions/1.json
   def show
+    @prescribed_medicines = @prescription.prescribed_medicines
   end
 
   # GET /prescriptions/new
   def new
     @prescription = Prescription.new
+    @prescription.prescribed_medicines.build
   end
 
   # GET /prescriptions/1/edit
   def edit
+    @prescription.prescribed_medicines.build
   end
 
   # POST /prescriptions or /prescriptions.json
@@ -65,6 +68,6 @@ class PrescriptionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def prescription_params
-      params.require(:prescription).permit(:date_prescribed, :doctor_id)
+      params.require(:prescription).permit(:date_prescribed, :doctor_id, prescribed_medicines_attributes: [:quantity, :medicine_id])
     end
 end

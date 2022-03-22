@@ -8,16 +8,20 @@
         - medicine.errors.each do |error|
           %li= error.full_message
   .field
-    = form.label :brand_name
-    = form.text_field :brand_name
-  .field
     = form.label :generic_name
-    = form.text_field :generic_name
+    = form.text_field :generic_name,:placeholder => "Paracetamol"
+  .field
+    = form.label :brand_name
+    = form.text_field :brand_name, :placeholder => "Biogesic"
+  
   .field
     = form.label :dosage_form
-    = form.text_field :dosage_form
+    = form.text_field :dosage_form, :placeholder => "500 mg tablet"
   .field
-    = form.label :cost
-    = form.text_field :cost
+    = form.label :category
+    = form.select :category, [["Others", "others"], ["Antibiotics", "antibiotic"], ["Fever and Relief", "antipyretic"], ["Vitamins", "vitamins"],["Antibiotics", "antibiotic"]]
+  .field
+    = form.label :price 
+    = form.text_field :cost, :placeholder => "₱"
   .actions
     = form.submit

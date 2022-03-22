@@ -1,3 +1,4 @@
+%h1 Prescription
 %p#notice= notice
 %p
   %strong Date prescribed:
@@ -5,6 +6,39 @@
 %p
   %strong Doctor:
   = @prescription.doctor_id
-= link_to 'Edit', edit_prescription_path(@prescription)
-|
-= link_to 'Back', prescriptions_path
+%table
+  %thead
+    %tr
+      %th Generic name
+      %th Brand name
+      %th Quantity
+      %th Unit Price
+      %th Amount
+      %th{:colspan => "3"}
+  %tbody
+    - @prescribed_medicines.each do |prescribed_medicine|
+      - medicine = Medicine.find(prescribed_medicine.medicine_id)
+      %tr
+        %td= medicine.generic_name.titleize
+        %td= medicine.brand_name.titleize
+        %td= prescribed_medicine.quantity
+        %td= number_to_currency(medicine.cost, unit: "₱ ", separator: ".", delimiter: ",")
+        %td= number_to_currency((prescribed_medicine.total_amount), unit: "₱ ", separator: ".", delimiter: ",")
+
+
+        -# %td= link_to 'Show', prescribed_medicine
+        -# %td= link_to 'Edit', edit_prescribed_medicine_path(prescribed_medicine)
+        -# %td= link_to 'Destroy', prescribed_medicine, method: :delete, data: { confirm: 'Are you sure?' }
+%h4 Total Items
+%p= PrescribedMedicine.where(prescription_id: @prescription.id).sum(:quantity)
+%h4 Total Price
+- total_price = Medicine.joins(:prescribed_medicines).where("prescribed_medicines.prescription_id" => @prescription.id).sum("medicines.cost * prescribed_medicines.quantity") 
+%p= number_to_currency(total_price, unit: "₱ ", separator: ".", delimiter: ",")
+
+
+-# = link_to 'New Prescribed Medicine', new_prescription_prescribed_medicine_path
+
+
+-# = link_to 'Edit', edit_prescription_path(@prescription)
+-# |
+-# = link_to 'Back', prescriptions_path

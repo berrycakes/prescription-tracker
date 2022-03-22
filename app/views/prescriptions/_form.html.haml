@@ -1,4 +1,4 @@
-= form_with(model: prescription) do |form|
+= form_with model: @prescription do |form|
   - if prescription.errors.any?
     #error_explanation
       %h2
@@ -13,5 +13,22 @@
   .field
     = form.label :doctor_id
     = form.text_field :doctor_id
+  
+  %table
+    %thead
+      %tr
+        %th Medicine
+        %th Quantity
+        %th Medicine
+        -# %th{:colspan => "3"}
+    %tbody.fields  
+      = form.fields_for :prescribed_medicines do |subform|
+        %tr
+          %td= subform.collection_select :medicine_id, Medicine.order(:generic_name), :id, :descriptive_name
+          %td= subform.number_field :quantity, :placeholder => "quantity"
+
+          
+
+      
   .actions
     = form.submit

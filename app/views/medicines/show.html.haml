@@ -1,16 +1,16 @@
 %p#notice= notice
 %p
   %strong Brand name:
-  = @medicine.brand_name
+  = @medicine.brand_name.titleize
 %p
   %strong Generic name:
-  = @medicine.generic_name
+  = @medicine.generic_name.titleize
 %p
   %strong Dosage form:
   = @medicine.dosage_form
 %p
   %strong Cost:
-  = @medicine.cost
+  = number_to_currency(@medicine.cost, unit: "₱ ", separator: ".", delimiter: ",")
 = link_to 'Edit', edit_medicine_path(@medicine)
 |
 = link_to 'Back', medicines_path
