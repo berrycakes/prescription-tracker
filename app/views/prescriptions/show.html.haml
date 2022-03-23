@@ -3,9 +3,18 @@
 %p
   %strong Date prescribed:
   = @prescription.date_prescribed
+-doctor = Doctor.find(@prescription.doctor_id)
 %p
   %strong Doctor:
-  = @prescription.doctor_id
+  = doctor.descriptive_name
+%p
+  %strong Specialization:
+  = doctor.specialization
+%p
+  %strong Clinic:
+  = doctor.clinic_name
+%p
+  = doctor.clinic_address
 %table
   %thead
     %tr
@@ -36,9 +45,6 @@
 %p= number_to_currency(total_price, unit: "₱ ", separator: ".", delimiter: ",")
 
 
--# = link_to 'New Prescribed Medicine', new_prescription_prescribed_medicine_path
-
-
--# = link_to 'Edit', edit_prescription_path(@prescription)
--# |
--# = link_to 'Back', prescriptions_path
+= link_to 'New Prescription', new_prescription_path
+= link_to 'Edit', edit_prescription_path(@prescription)
+= link_to 'Back', prescriptions_path

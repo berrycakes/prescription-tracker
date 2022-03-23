@@ -10,7 +10,7 @@
     - @prescriptions.each do |prescription|
       %tr
         %td= prescription.date_prescribed
-        %td= prescription.doctor_id
+        %td= Doctor.find(prescription.doctor_id).full_name
         %td= link_to 'Show', prescription
         %td= link_to 'Edit', edit_prescription_path(prescription)
         %td= link_to 'Destroy', prescription, method: :delete, data: { confirm: 'Are you sure?' }
