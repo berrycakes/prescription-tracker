@@ -34,10 +34,6 @@
         %td= number_to_currency(medicine.cost, unit: "₱ ", separator: ".", delimiter: ",")
         %td= number_to_currency((prescribed_medicine.total_amount), unit: "₱ ", separator: ".", delimiter: ",")
 
-
-        -# %td= link_to 'Show', prescribed_medicine
-        -# %td= link_to 'Edit', edit_prescribed_medicine_path(prescribed_medicine)
-        -# %td= link_to 'Destroy', prescribed_medicine, method: :delete, data: { confirm: 'Are you sure?' }
 %h4 Total Items
 %p= PrescribedMedicine.where(prescription_id: @prescription.id).sum(:quantity)
 %h4 Total Price

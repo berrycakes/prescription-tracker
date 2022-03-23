@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :prescriptions do 
     resources :prescription_notes
-    resources :prescribed_medicines
+    # resources :prescribed_medicines
   end
   resources :medicines
   resources :doctors

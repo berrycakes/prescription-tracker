@@ -19,6 +19,12 @@ class PrescriptionsController < ApplicationController
 
   # GET /prescriptions/1/edit
   def edit
+    # @prescription.prescribed_medicines.build
+    if @prescription.prescribed_medicines.count == 0
+      @prescription.prescribed_medicines.build
+    end
+  end
+  def add_row
     @prescription.prescribed_medicines.build
   end
 
@@ -68,6 +74,6 @@ class PrescriptionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def prescription_params
-      params.require(:prescription).permit(:date_prescribed, :doctor_id, prescribed_medicines_attributes: [:quantity, :medicine_id])
+      params.require(:prescription).permit(:date_prescribed, :doctor_id, prescribed_medicines_attributes:[:id, :quantity, :medicine_id, :_destroy])
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_19_044530) do
+ActiveRecord::Schema.define(version: 2022_03_23_063655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,8 +38,6 @@ ActiveRecord::Schema.define(version: 2022_03_19_044530) do
   end
 
   create_table "prescribed_medicines", force: :cascade do |t|
-    t.string "brand_name"
-    t.string "generic_name"
     t.integer "quantity"
     t.bigint "prescription_id", null: false
     t.bigint "medicine_id", null: false

@@ -19,15 +19,19 @@
       %tr
         %th Medicine
         %th Quantity
+        %th Action
         -# %th{:colspan => "3"}
     %tbody.fields  
       = form.fields_for :prescribed_medicines do |subform|
-        %tr
+        %tr.field_row
           %td= subform.collection_select :medicine_id, Medicine.order(:generic_name), :id, :descriptive_name, :prompt => "Select medicine"
           %td= subform.number_field :quantity, :placeholder => "quantity"
+          %td
+            = link_to 'delete', '#', class: 'remove_record'
+            = subform.check_box :_destroy, as: :hidden
 
-          
 
-      
   .actions
     = form.submit
+    -# = link_to_add_row('Add Medicine', form, :prescribed_medicines, class: 'btn')
+    = button_to 'add new medicine', class: 'add_fields'
