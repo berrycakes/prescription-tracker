@@ -60,3 +60,5 @@ gem "tailwindcss-rails", "~> 2.0"
 gem "erb2haml", :group => :development
 
 gem "haml"
+
+gem 'jquery-rails'

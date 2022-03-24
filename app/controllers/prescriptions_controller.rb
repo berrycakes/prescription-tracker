@@ -19,7 +19,6 @@ class PrescriptionsController < ApplicationController
 
   # GET /prescriptions/1/edit
   def edit
-    # @prescription.prescribed_medicines.build
     if @prescription.prescribed_medicines.count == 0
       @prescription.prescribed_medicines.build
     end
@@ -36,6 +35,7 @@ class PrescriptionsController < ApplicationController
       if @prescription.save
         format.html { redirect_to prescription_url(@prescription), notice: "Prescription was successfully created." }
         format.json { render :show, status: :created, location: @prescription }
+        format.js
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @prescription.errors, status: :unprocessable_entity }
@@ -49,6 +49,7 @@ class PrescriptionsController < ApplicationController
       if @prescription.update(prescription_params)
         format.html { redirect_to prescription_url(@prescription), notice: "Prescription was successfully updated." }
         format.json { render :show, status: :ok, location: @prescription }
+        format.js
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @prescription.errors, status: :unprocessable_entity }

@@ -1,3 +1,8 @@
+//= require jquery
+//= require jquery_ujs
+//= require turbolinks
+//= require_tree .
+
 // This file is automatically compiled by Webpack, along with any other files
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
@@ -12,12 +17,18 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-document.addEventListener('turbolinks:load', () => {
-  const formField = document.querySelector('.fields')
-  const formFieldRow = document.querySelector('.field_row')
-  const addFieldsBtn = document.querySelectorAll('.add_fields')
-  addFieldsBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-    formField.append(formFieldRow)
+$(document).on('turbolinks:load', function () {
+  $('form').on('click', '.add_fields', function (event) {
+    let regexp, time
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $('.fields').append($(this).data('fields').replace(regexp, time))
+    return event.preventDefault()
+  })
+
+  $('form').on('click', '.remove_record', function (event) {
+    $(this).prev('input[type=hidden]').val('1')
+    $(this).closest('tr').hide()
+    return event.preventDefault()
   })
 })

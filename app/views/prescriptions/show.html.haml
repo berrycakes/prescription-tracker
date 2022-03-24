@@ -33,12 +33,12 @@
         %td= prescribed_medicine.quantity
         %td= number_to_currency(medicine.cost, unit: "₱ ", separator: ".", delimiter: ",")
         %td= number_to_currency((prescribed_medicine.total_amount), unit: "₱ ", separator: ".", delimiter: ",")
+  %tfoot
+    %tr
+      %td= "Total Items: " + PrescribedMedicine.where(prescription_id: @prescription.id).sum(:quantity).to_s
+      - total_price = Medicine.joins(:prescribed_medicines).where("prescribed_medicines.prescription_id" => @prescription.id).sum("medicines.cost * prescribed_medicines.quantity") 
+      %td= "Total Price: " + number_to_currency(total_price, unit: "₱ ", separator: ".", delimiter: ",").to_s
 
-%h4 Total Items
-%p= PrescribedMedicine.where(prescription_id: @prescription.id).sum(:quantity)
-%h4 Total Price
-- total_price = Medicine.joins(:prescribed_medicines).where("prescribed_medicines.prescription_id" => @prescription.id).sum("medicines.cost * prescribed_medicines.quantity") 
-%p= number_to_currency(total_price, unit: "₱ ", separator: ".", delimiter: ",")
 
 
 = link_to 'New Prescription', new_prescription_path

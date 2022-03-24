@@ -1,0 +1,6 @@
+%tr.field_row
+  %td= f.collection_select :medicine_id, Medicine.order(:generic_name), :id, :descriptive_name, :prompt => "Select medicine"
+  %td= f.number_field :quantity, :placeholder => "quantity"
+  %td
+    = f.hidden_field :_destroy, :value => '0'
+    = link_to 'delete', '#', class: 'remove_record'
