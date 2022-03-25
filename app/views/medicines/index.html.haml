@@ -1,24 +1,38 @@
 %p#notice= notice
 %h1 Medicines
-%table
-  %thead
-    %tr
-      %th Brand name
-      %th Generic name
-      %th Dosage form
-      %th Category
-      %th Cost
-      %th{:colspan => "3"}
-  %tbody
-    - @medicines.each do |medicine|
-      %tr
-        %td= medicine.brand_name.titleize
-        %td= medicine.generic_name.titleize
-        %td= medicine.dosage_form
-        %td= medicine.category
-        %td= number_to_currency(medicine.cost, unit: "₱ ", separator: ".", delimiter: ",")
-        %td= link_to 'Show', medicine
-        %td= link_to 'Edit', edit_medicine_path(medicine)
-        %td= link_to 'Destroy', medicine, method: :delete, data: { confirm: 'Are you sure?' }
+%div{:class => "my-5 flex-col"}
+  %div{:class => "overflow-x-auto shadow-md sm:rounded-lg" }
+    %div{:class => "inline-block min-w-full align-middle"}
+      %div{:class => "overflow-hidden"}
+        %table
+          %thead
+            %tr
+              %th Brand name
+              %th Generic name
+              %th Dosage form
+              %th Category
+              %th Cost
+              %th{:colspan => "3"}
+          %tbody
+            - @medicines.each do |medicine|
+              %tr
+                %td= medicine.brand_name.titleize
+                %td= medicine.generic_name.titleize
+                %td= medicine.dosage_form
+                %td= medicine.category
+                %td= number_to_currency(medicine.cost, unit: "₱ ", separator: ".", delimiter: ",")
+                -if medicine.is_favorite
+                  %td
+                    %button{:class => "btn-secondary"}= button_to 'Hide', remove_favorite_medicine_path(medicine), method: :patch
+                -else
+                  %td
+                    %button{:class => "btn-secondary"}= button_to 'Show', add_favorite_medicine_path(medicine), method: :patch
+                %td= link_to 'View', medicine
+                %td= link_to 'Edit', edit_medicine_path(medicine)
+        
 %br/
+- if params[:action] == "index"
+  = link_to 'Show All Medicines', medicines_all_path
+- else 
+  = link_to 'Show Favorite Medicines', medicines_path
 = link_to 'New Medicine', new_medicine_path

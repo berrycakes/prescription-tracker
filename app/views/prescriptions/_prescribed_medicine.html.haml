@@ -1,6 +1,11 @@
 %tr.field_row
-  %td= f.collection_select :medicine_id, Medicine.order(:generic_name), :id, :descriptive_name, :prompt => "Select medicine"
+  -if params[:action] == "edit"
+    %td= f.collection_select :medicine_id, Medicine.order(:generic_name), :id, :descriptive_name, :prompt => "Select medicine"
+  - else
+    %td= f.collection_select :medicine_id, Medicine.order(:generic_name).where(:is_favorite => true), :id, :descriptive_name, :prompt => "Select medicine"
+    
   %td= f.number_field :quantity, :placeholder => "quantity"
+  %td= f.text_field :note, :placeholder => "note"
   %td
     = f.hidden_field :_destroy, :value => '0'
     = link_to 'delete', '#', class: 'remove_record'

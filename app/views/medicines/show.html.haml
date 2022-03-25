@@ -11,6 +11,13 @@
 %p
   %strong Cost:
   = number_to_currency(@medicine.cost, unit: "₱ ", separator: ".", delimiter: ",")
+-orders = Medicine.joins(:prescribed_medicines).where("prescribed_medicines.medicine_id" => @medicine.id).sum("prescribed_medicines.quantity")
+%p
+  %strong Orders:
+  = orders.to_s 
+
+
 = link_to 'Edit', edit_medicine_path(@medicine)
-|
+-if orders == 0
+  = link_to 'Delete Medicine from Record', @medicine, method: :delete, data: { confirm: 'Are you sure?' }
 = link_to 'Back', medicines_path

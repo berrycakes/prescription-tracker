@@ -62,6 +62,10 @@
   .actions {
     @apply grid place-content-center;
   }
+
+  .template_head {
+    @apply flex flex-col items-center py-12 px-4 mx-20 sm:px-6 lg:px-8 border-2;
+  }
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto&display=swap');

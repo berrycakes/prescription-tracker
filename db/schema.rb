@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_063655) do
+ActiveRecord::Schema.define(version: 2022_03_25_142049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2022_03_23_063655) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "category"
+    t.boolean "is_favorite"
   end
 
   create_table "prescribed_medicines", force: :cascade do |t|
@@ -43,8 +44,11 @@ ActiveRecord::Schema.define(version: 2022_03_23_063655) do
     t.bigint "medicine_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "prescription_notes_id"
+    t.string "note"
     t.index ["medicine_id"], name: "index_prescribed_medicines_on_medicine_id"
     t.index ["prescription_id"], name: "index_prescribed_medicines_on_prescription_id"
+    t.index ["prescription_notes_id"], name: "index_prescribed_medicines_on_prescription_notes_id"
   end
 
   create_table "prescription_notes", force: :cascade do |t|
@@ -64,6 +68,7 @@ ActiveRecord::Schema.define(version: 2022_03_23_063655) do
   end
 
   add_foreign_key "prescribed_medicines", "medicines"
+  add_foreign_key "prescribed_medicines", "prescription_notes", column: "prescription_notes_id"
   add_foreign_key "prescribed_medicines", "prescriptions"
   add_foreign_key "prescription_notes", "prescriptions"
   add_foreign_key "prescriptions", "doctors"

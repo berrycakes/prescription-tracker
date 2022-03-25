@@ -1,13 +1,29 @@
 class MedicinesController < ApplicationController
-  before_action :set_medicine, only: %i[ show edit update destroy ]
+  before_action :set_medicine, only: %i[ add_favorite remove_favorite show edit update destroy ]
 
   # GET /medicines or /medicines.json
   def index
+    @medicines = Medicine.where(:is_favorite => true)
+  end
+
+   # GET /medicines/all
+  def all
     @medicines = Medicine.all
+    render :index
   end
 
   # GET /medicines/1 or /medicines/1.json
   def show
+  end
+
+  def add_favorite
+    @medicine.update(:is_favorite => true)
+    redirect_to medicines_all_path
+  end
+
+  def remove_favorite
+    @medicine.update(:is_favorite => false)
+    redirect_to medicines_path
   end
 
   # GET /medicines/new
@@ -65,6 +81,6 @@ class MedicinesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def medicine_params
-      params.require(:medicine).permit(:brand_name, :generic_name, :dosage_form, :cost, :category)
+      params.require(:medicine).permit(:brand_name, :generic_name, :dosage_form, :cost, :category, :is_favorite)
     end
 end

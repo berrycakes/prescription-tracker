@@ -19,10 +19,13 @@ ActiveStorage.start()
 
 $(document).on('turbolinks:load', function () {
   $('form').on('click', '.add_fields', function (event) {
-    let regexp, time
+    let regexp, time, table, newRow
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
-    $('.fields').append($(this).data('fields').replace(regexp, time))
+    table = $('.fields')
+    newRow = $(this).data('fields').replace(regexp, time)
+    table.append(newRow)
+    $('.fields tr:last-child').addClass('new_field')
     return event.preventDefault()
   })
 
