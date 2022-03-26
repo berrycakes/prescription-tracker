@@ -27,7 +27,7 @@
         = render 'prescribed_medicine', f: builder
 
   .actions
-    %button.btn-secondary= link_to_add_row('New Entry', form, :prescribed_medicines, class: 'btn')
+    .btn-new= link_to_add_row('New Entry', form, :prescribed_medicines, class: 'btn')
     
   .actions
-    %button.btn-primary= form.submit "Save"
+    .btn-primary= form.submit "Save"

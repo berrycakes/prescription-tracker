@@ -1,5 +1,7 @@
 %p#notice= notice
 %h1 Prescriptions
+.btn-new
+  = link_to 'New Prescription', new_prescription_path
 %div{:class => "my-5 flex-col"}
   %div{:class => "overflow-x-auto shadow-md sm:rounded-lg" }
     %div{:class => "inline-block min-w-full align-middle"}
@@ -9,14 +11,19 @@
             %tr
               %th Date prescribed
               %th Doctor
+              %th Items
+              %th Amount
               %th{:colspan => "3"}
           %tbody
             - @prescriptions.each do |prescription|
-              %tr
+              %tr.table__row
                 %td= prescription.date_prescribed
                 %td= Doctor.find(prescription.doctor_id).full_name
-                %td= link_to 'Show', prescription
+                %td= PrescribedMedicine.where(prescription_id: prescription.id).count
+                - total_price = Medicine.joins(:prescribed_medicines).where("prescribed_medicines.prescription_id" => prescription.id).sum("medicines.cost * prescribed_medicines.quantity") 
+                %td= number_to_currency(total_price, unit: "₱ ", separator: ".", delimiter: ",").to_s
+                %td= link_to 'View', prescription
                 %td= link_to 'Edit', edit_prescription_path(prescription)
-                %td= link_to 'Destroy', prescription, method: :delete, data: { confirm: 'Are you sure?' }
-        %br/
-= link_to 'New Prescription', new_prescription_path
+                %td= link_to 'Delete', prescription, method: :delete, data: { confirm: 'Are you sure?' }
+
+

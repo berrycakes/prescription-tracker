@@ -1,5 +1,13 @@
 %p#notice= notice
 %h1 Medicines
+.flex
+  .btn-new
+    = link_to 'New Medicine', new_medicine_path
+  .btn-new
+    - if params[:action] == "index"
+      = link_to 'Show All Medicines', medicines_all_path
+    - else 
+      = link_to 'Show Favorite Medicines', medicines_path
 %div{:class => "my-5 flex-col"}
   %div{:class => "overflow-x-auto shadow-md sm:rounded-lg" }
     %div{:class => "inline-block min-w-full align-middle"}
@@ -29,10 +37,5 @@
                     %button{:class => "btn-secondary"}= button_to 'Show', add_favorite_medicine_path(medicine), method: :patch
                 %td= link_to 'View', medicine
                 %td= link_to 'Edit', edit_medicine_path(medicine)
-        
-%br/
-- if params[:action] == "index"
-  = link_to 'Show All Medicines', medicines_all_path
-- else 
-  = link_to 'Show Favorite Medicines', medicines_path
-= link_to 'New Medicine', new_medicine_path
+
+

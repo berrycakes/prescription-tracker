@@ -1,47 +1,51 @@
 %h1 Prescription
 %p#notice= notice
-.template_head
-  %p
-    %strong Date prescribed:
-    = @prescription.date_prescribed
-  -doctor = Doctor.find(@prescription.doctor_id)
-  %p
-    %strong Doctor:
-    = doctor.descriptive_name
-  %p
-    %strong Specialization:
-    = doctor.specialization
-  %p
-    %strong Clinic:
-    = doctor.clinic_name
-  %p
-    = doctor.clinic_address
-  %table
-    %thead
-      %tr
-        %th Generic name
-        %th Brand name
-        %th Quantity
-        %th Unit Price
-        %th Amount
-        %th{:colspan => "3"}
-    %tbody
+.w-full.flex.justify-center
+  .prescription 
+    .prescription_head
+      -doctor = Doctor.find(@prescription.doctor_id)
+      %h4= doctor.name_title
+      %p.leading-tight.text-lg.py-0.italic= doctor.specialization.upcase
+      %p.leading-tight.text-lg.py-0= doctor.clinic_name
+      %p.leading-tight.text-lg.py-0= doctor.clinic_address
+
+    .prescription_body
+      %p
+        %strong Date prescribed:
+        = @prescription.date_prescribed.strftime("%B %d,  %Y") 
+      %p
+        %strong Total Items:
+        = PrescribedMedicine.where(prescription_id: @prescription.id).count
+      %p
+        %strong Total Quantity:
+        = PrescribedMedicine.where(prescription_id: @prescription.id).sum(:quantity).to_s
+      - total_price = Medicine.joins(:prescribed_medicines).where("prescribed_medicines.prescription_id" => @prescription.id).sum("medicines.cost * prescribed_medicines.quantity") 
+      %p
+        %strong Total Amount:
+        = number_to_currency(total_price, unit: "₱ ", separator: ".", delimiter: ",").to_s
       - @prescribed_medicines.each do |prescribed_medicine|
         - medicine = Medicine.find(prescribed_medicine.medicine_id)
-        %tr
-          %td= medicine.generic_name.titleize
-          %td= medicine.brand_name.titleize
-          %td= prescribed_medicine.quantity
-          %td= number_to_currency(medicine.cost, unit: "₱ ", separator: ".", delimiter: ",")
-          %td= number_to_currency((prescribed_medicine.total_amount), unit: "₱ ", separator: ".", delimiter: ",")
-        %tr
-          %td= prescribed_medicine.note
-
-    %tfoot
-      %tr
-        %td= "Total Items: " + PrescribedMedicine.where(prescription_id: @prescription.id).sum(:quantity).to_s
-        - total_price = Medicine.joins(:prescribed_medicines).where("prescribed_medicines.prescription_id" => @prescription.id).sum("medicines.cost * prescribed_medicines.quantity") 
-        %td= "Total Price: " + number_to_currency(total_price, unit: "₱ ", separator: ".", delimiter: ",").to_s
+        .prescription_item
+          .prescription_details
+            %p
+              %strong Generic Name:
+              = medicine.generic_name.titleize
+            %p
+              %strong Brand Name:
+              = medicine.brand_name.titleize
+            %p
+              %strong Quantity:
+              = prescribed_medicine.quantity
+            %p
+              %strong Unit Cost:
+              = number_to_currency(medicine.cost, unit: "₱ ", separator: ".", delimiter: ",")
+            %p
+              %strong Total:
+              = number_to_currency((prescribed_medicine.total_amount), unit: "₱ ", separator: ".", delimiter: ",")
+          .note
+            %td.note= prescribed_medicine.note
+      %p
+        %strong ***NOTHING FOLLOWS***
 
 
 

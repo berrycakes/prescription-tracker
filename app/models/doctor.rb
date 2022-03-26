@@ -20,4 +20,8 @@ class Doctor < ApplicationRecord
     def full_name
         "Dr. #{self.first_name.titleize} #{self.last_name.titleize}"
     end
+
+    def name_title
+        "#{self.first_name.titleize} #{self.last_name.titleize}, MD"
+    end
 end
