@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :prescriptions do 
-      # resources :prescribed_medicines
-  end
+  resources :prescriptions
   get 'medicines/all', to: 'medicines#all'
   resources :medicines
   resources :doctors

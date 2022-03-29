@@ -1,5 +1,7 @@
 %p#notice= notice
 %h1 Medicines
+- if params[:action] == "all"
+  = render 'medicines/search_form.html.erb'
 .flex
   .btn-new
     = link_to 'New Medicine', new_medicine_path

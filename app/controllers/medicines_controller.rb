@@ -8,7 +8,9 @@ class MedicinesController < ApplicationController
 
    # GET /medicines/all
   def all
-    @medicines = Medicine.all
+    @q = Medicine.ransack(params[:q])
+    @medicines = @q.result
+    # @medicines = Medicine.all
     render :index
   end
 

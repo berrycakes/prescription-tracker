@@ -62,3 +62,5 @@ gem "erb2haml", :group => :development
 gem "haml"
 
 gem 'jquery-rails'
+
+gem 'ransack'

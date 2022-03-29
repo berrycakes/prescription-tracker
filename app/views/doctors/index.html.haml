@@ -11,24 +11,19 @@
             %tr
               %th First name
               %th Last name
-              %th License number
               %th Specialization
               %th Clinic name
-              %th Clinic address
-              %th Contact
+              %th Prescriptions 
               %th{:colspan => "3"}
           %tbody
             - @doctors.each do |doctor|
               %tr
                 %td= doctor.first_name
                 %td= doctor.last_name
-                %td= doctor.license_number
                 %td= doctor.specialization
                 %td= doctor.clinic_name
-                %td= doctor.clinic_address
-                %td= doctor.contact
+                %td= Prescription.where(doctor_id: doctor.id).count
                 %td= link_to 'View', doctor
                 %td= link_to 'Edit', edit_doctor_path(doctor)
-                %td= link_to 'Delete', doctor, method: :delete, data: { confirm: 'Are you sure?' }
 
 

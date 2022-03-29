@@ -1,0 +1,8 @@
+<%= search_form_for @q do |f| %>
+
+  # Search if the name field contains...
+  <%= f.label :brand_name_cont %>
+  <%= f.search_field :brand_name_cont %>
+
+  <%= f.submit %>
+<% end %>

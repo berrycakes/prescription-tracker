@@ -9,8 +9,8 @@
         %table
           %thead
             %tr
-              %th Date prescribed
-              %th Doctor
+              %th= sort_link(@q, :date_prescribed, "Date prescribed")
+              %th= sort_link(@q, :doctor_id, "Doctor")
               %th Items
               %th Amount
               %th{:colspan => "3"}
