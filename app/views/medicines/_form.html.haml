@@ -10,6 +10,11 @@
   .field
     = form.label :generic_name
     = form.text_field :generic_name,:placeholder => "Paracetamol"
+  - if medicine.errors[:generic_name].any?
+    #error_explanation
+      %ul
+        - medicine.errors[:generic_name].each do |error|
+          %li= error
   .field
     = form.label :brand_name
     = form.text_field :brand_name, :placeholder => "Biogesic"
