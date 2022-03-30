@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700;900&display=swap');
+
 @layer components {
   .btn-primary {
     @apply uppercase font-title text-gray-700 py-3 px-8 bg-biloba-flower-400 rounded-full
@@ -63,6 +65,9 @@
   td {
     @apply py-6 px-6 text-gray-700 whitespace-nowrap;
   }
+  strong {
+    @apply font-bold;
+  }
   .table__row--link {
     @apply px-0;
   }
@@ -90,5 +95,3 @@
     @apply flex flex-col items-center justify-center italic py-6 px-4;
   }
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto&display=swap');
